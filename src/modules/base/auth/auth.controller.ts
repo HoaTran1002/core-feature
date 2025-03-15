@@ -1,19 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { Register } from './dto/register.dto';
+import { Controller, Get, UseGuards, Body } from '@nestjs/common';
 
-@Controller('auth')
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from './auth.service';
+import { LoginGoogleDTO } from './dto/login-google.dto';
+@Controller('auth-google')
 export class AuthController {
-  @Post()
-  register(@Body() body: Register) {
-    console.log(body);
+  constructor(private readonly authServices: AuthService) {}
+
+  @Get('redirect')
+  // @UseGuards(AuthGuard('google'))
+  async googleAuthRedirect(@Body() body: LoginGoogleDTO) {
+    return await this.authServices.googleLogin(body);
   }
-
-  @Post('login-google')
-  loginWithGoogle() {}
-
-  @Post('login-facebook')
-  loginWithFacebook() {}
-
-  @Post('login-apple')
-  loginWithApple() {}
 }
