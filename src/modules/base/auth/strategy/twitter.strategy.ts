@@ -2,16 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { VerifyCallback } from 'passport-google-oauth20';
 import { config } from 'dotenv';
-import { Strategy } from 'passport-facebook';
+import { Strategy } from 'passport-twitter';
 config();
 
 @Injectable()
-export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
+export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
   constructor() {
     super({
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: 'http://localhost:3000/auth/facebook/redirect',
+      clientID: process.env.TWITTER_APP_ID,
+      clientSecret: process.env.TWITTER_APP_SECRET,
+      callbackURL: 'http://localhost:3000/auth/twitter/redirect',
       scope: ['email', 'profile'],
     });
   }

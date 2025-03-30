@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
+import { AppleStrategy } from './apple.strategy';
 import { GoogleStrategy } from './google.strategy';
 import { FacebookStrategy } from './facebook.strategy';
-import { AppleStrategy } from './apple.strategy';
 import { LinkedinStrategy } from './linkedin.strategy';
 
 @Module({
   providers: [
+    AppleStrategy,
     GoogleStrategy,
     FacebookStrategy,
-    AppleStrategy,
     LinkedinStrategy,
   ],
-  exports: [GoogleStrategy, FacebookStrategy, AppleStrategy, LinkedinStrategy],
+  exports: [AppleStrategy, GoogleStrategy, FacebookStrategy, LinkedinStrategy],
 })
 export class AuthStrategyModule {}
